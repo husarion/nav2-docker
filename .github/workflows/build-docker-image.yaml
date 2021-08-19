@@ -36,11 +36,11 @@ jobs:
         platforms: linux/arm64, linux/amd64
         build-args: ROS_DISTRO=foxy
         push: true
-        tags: husarion/nav2-demo-rosbot-docker
+        tags: husarion/nav2:foxy
         cache-from: type=registry,ref=husarion/nav2:foxy
         cache-to: type=inline
 
-        
+
   build_eloquent:
     runs-on: ubuntu-18.04
 
@@ -71,6 +71,6 @@ jobs:
         platforms: linux/arm64, linux/amd64, linux/arm/v7
         build-args: ROS_DISTRO=eloquent
         push: true
-        tags: husarion/nav2-demo-rosbot-docker
+        tags: husarion/nav2:eloquent
         cache-from: type=registry,ref=husarion/nav2:eloquent
         cache-to: type=inline
