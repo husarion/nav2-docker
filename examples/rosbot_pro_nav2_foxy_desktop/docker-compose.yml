@@ -1,0 +1,54 @@
+version: "2.3"
+services:
+  # ROS Foxy navigation
+  nav2:
+    iamge: husarion/nav2-demo
+    tty: true        
+    restart: on-failure
+    privileged: false
+    command: ros2 launch rosbot_description navigation_docker.launch.py
+
+
+  # ROS Melodic rosbot hardware layer
+  rosbot:
+    image: husarion/rosbot
+    tty: true      
+    restart: on-failure
+    environment:
+      - "ROS_MASTER_URI=http://my-ros-master:11311"
+      - "SERIAL_PORT=/dev/ttyS4" # default: ttyS1 - rosbot2.0; ttyS4 - rosbot2.0 pro
+    privileged: false
+    devices:
+      - "/dev/ttyS4"   # must match environment SERIAL_PORT 
+    command: roslaunch rosbot_description rosbot_docker.launch
+
+
+  # ROS Noetic master
+  my-ros-master:
+    image: ros:noetic-ros-core
+    restart: on-failure
+    tty: true 
+    environment:
+      - "ROS_MASTER_URI=http://my-ros-master:11311"    
+    command: stdbuf -o L roscore
+
+
+  # ROS Noetic + ROS 2 foxy
+  bridge:
+    image: ros:foxy-ros1-bridge
+    restart: on-failure
+    environment:
+      - "ROS_MASTER_URI=http://my-ros-master:11311"
+    command: ros2 run ros1_bridge dynamic_bridge
+    
+
+  # ROS Melodic Rplidar
+  rplidar:
+    image: husarion/rplidar:latest
+    restart: unless-stopped
+    environment:
+        - "ROS_MASTER_URI=http://my-ros-master:11311"
+    devices:
+      - /dev/ttyUSB0
+    tty: true      
+    command: roslaunch rplidar_ros rplidar_a3.launch # For Rosbot 2.0 PRO use roslaunch rplidar_ros rplidar_a3.launch
