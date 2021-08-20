@@ -1,7 +1,7 @@
 import os
 
 from launch import LaunchDescription
-import launch_ros.actions
+from launch_ros.actions import Node
 from launch.substitutions import LaunchConfiguration
 from launch.actions import DeclareLaunchArgument, SetEnvironmentVariable
 from ament_index_python.packages import get_package_share_directory
@@ -9,10 +9,10 @@ from nav2_common.launch import RewrittenYaml
 
 
 def generate_launch_description():
-    rosbot_description = get_package_share_directory('rosbot_description')
+    husarion_nav2 = get_package_share_directory('husarion_nav2')
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
     nav2_conf = LaunchConfiguration('nav2_conf',
-                    default=rosbot_description+'/config/nav2_params.yaml')
+                    default=husarion_nav2+'/config/nav2_params.yaml')
 
     autostart = LaunchConfiguration('autostart')
     params_file = LaunchConfiguration('params')
@@ -63,14 +63,14 @@ def generate_launch_description():
                 'behavior_trees', 'navigate_w_replanning_and_recovery.xml'),
             description='Full path to the behavior tree xml file to use'),
 
-        launch_ros.actions.Node(
+        Node(
             package='nav2_controller',
             executable='controller_server',
             output='screen',
             parameters=[configured_params],
             remappings=remappings),
 
-        launch_ros.actions.Node(
+        Node(
             package='nav2_planner',
             executable='planner_server',
             name='planner_server',
@@ -79,7 +79,7 @@ def generate_launch_description():
             remappings=remappings),
 
 
-        launch_ros.actions.Node(
+        Node(
             package='nav2_recoveries',
             executable='recoveries_server',
             name='recoveries_server',
@@ -87,7 +87,7 @@ def generate_launch_description():
             parameters=[{'use_sim_time': use_sim_time}],
             remappings=remappings),
 
-        launch_ros.actions.Node(
+        Node(
             package='nav2_bt_navigator',
             executable='bt_navigator',
             name='bt_navigator',
@@ -95,7 +95,7 @@ def generate_launch_description():
             parameters=[configured_params],
             remappings=remappings),
 
-        launch_ros.actions.Node(
+        Node(
             package='nav2_waypoint_follower',
             executable='waypoint_follower',
             name='waypoint_follower',
@@ -103,7 +103,7 @@ def generate_launch_description():
             parameters=[configured_params],
             remappings=remappings),
 
-        launch_ros.actions.Node(
+        Node(
             package='nav2_lifecycle_manager',
             executable='lifecycle_manager',
             name='lifecycle_manager_navigation',

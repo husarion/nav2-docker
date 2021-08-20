@@ -1,26 +1,28 @@
-ARG ROS_DISTRO=eloquent
-
-FROM ros:$ROS_DISTRO-ros-base
+# choose ROS distribudion based on build argument
+ARG ROS_DOCKER_IMAGE=foxy-ros-base
+FROM ros:$ROS_DOCKER_IMAGE
 
 SHELL ["/bin/bash", "-c"]
 
+# install dependencies
 RUN apt update && apt install -y \
     python3-pip \
+    python3-colcon-common-extensions \
     ros-$ROS_DISTRO-slam-toolbox \
     ros-$ROS_DISTRO-navigation2
 
 RUN apt upgrade -y 
 
-RUN mkdir -p /ros2_ws/src \ 
-    && cd /ros2_ws \
-    && colcon build --symlink-install --merge-install
-
+# create ros2_ws, copy and build package
+RUN mkdir -p /ros2_ws/src
 COPY ./husarion_nav2 /ros2_ws/src/husarion_nav2
-
-RUN cd /ros2_ws \
-    && rosdep update \
-    && source /opt/ros/$ROS_DISTRO/setup.bash \
-    && colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release --cmake-args -DBUILD_TESTING=OFF --merge-install
+WORKDIR /ros2_ws 
+RUN source /opt/ros/$ROS_DISTRO/setup.bash \
+    && colcon build --symlink-install
+    
+# clear ubuntu packages
+RUN apt clean && \
+    rm -rf /var/lib/apt/lists/*
 
 COPY ./ros_entrypoint.sh /
 

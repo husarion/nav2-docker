@@ -1,0 +1,26 @@
+version: "2.3"
+
+services:
+  # ROS Eloquent navigation
+  nav2:
+    iamge: husarion/nav2-docker:eloquent
+    tty: true
+    restart: on-failure
+    network_mode: host
+    ipc: host
+    command: ros2 launch husarion_nav2 bringup_both.launch.py
+
+
+  # ROS Foxy Rviz2 VNC
+  rviz2:
+    image: husarion/ros2-desktop-vnc:latest
+    restart: on-failure
+    network_mode: host
+    ipc: host
+    enviroment:
+      - "ROS_DOMAIN_ID=2"
+    volumes:
+      - ./rosbot_pro.rviz:/root/.rviz2/default.rviz
+    ports: 
+      - 6080:80
+    shm_size: '512m'
