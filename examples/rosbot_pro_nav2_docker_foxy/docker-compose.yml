@@ -3,7 +3,7 @@ version: "2.3"
 services:
   # ROS Foxy navigation
   nav2:
-    iamge: husarion/nav2-demo:foxy
+    image: husarion/nav2:foxy
     tty: true
     restart: on-failure
     privileged: false

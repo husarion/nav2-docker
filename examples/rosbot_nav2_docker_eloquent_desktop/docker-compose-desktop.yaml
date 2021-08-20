@@ -3,7 +3,7 @@ version: "2.3"
 services:
   # ROS Eloquent navigation
   nav2:
-    iamge: husarion/nav2-docker:eloquent
+    image: husarion/nav2:eloquent
     tty: true
     restart: on-failure
     network_mode: host
