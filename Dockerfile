@@ -1,5 +1,5 @@
 # choose ROS distribudion based on build argument
-ARG ROS_IMAGE=foxy
+ARG ROS_DISTRO=foxy
 FROM ros:$ROS_DISTRO-ros-core
 
 SHELL ["/bin/bash", "-c"]
