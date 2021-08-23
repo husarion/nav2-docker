@@ -34,7 +34,7 @@ services:
     network_mode: host
     environment:
       - "ROS_IP=$HOST_IP"
-      - "ROS_MASTER_URI=http:/$HOST_IP:11311"
+      - "ROS_MASTER_URI=http://$HOST_IP:11311"
       - "SERIAL_PORT=/dev/ttyS4" # default: ttyS1 - rosbot2.0; ttyS4 - rosbot2.0 `pro
     privileged: false
     devices:
