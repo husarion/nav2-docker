@@ -8,6 +8,8 @@ services:
     restart: on-failure
     network_mode: host
     ipc: host
+    environment:
+      - "ROS_DOMAIN_ID=2"
     command: ros2 launch husarion_nav2 bringup_both.launch.py
 
 
