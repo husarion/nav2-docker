@@ -51,9 +51,6 @@ ros2 run rviz2 rviz2
 ```
 
 ### Rosbot 2.0 stadlone
-> Note 1: **This example also shows how to pass custom nav2 params to docker.** It is suggested to use the same names for files as they are by default so you can avoid long commands with many arguments.
-
-
 > Note 2: Rosbot 2.0 uses ARM32 processor which is not suported by ROS Foxy dockers and above. That is why in this case we base our docker image on  `ros:eloquent-ros-core`.
 
 
@@ -93,3 +90,10 @@ docker-compose -f docker-compose-desktop.yaml up
 ```bash
 ros2 run rviz2 rviz2
 ```
+
+## Using custom Nav2 and Slam Toolbox parameters
+
+In order to pass your custom parameters you can refer to one of [examples](./examples/custom_parameters).
+It shows the simplest way done by replacing original files by binding folder containing files with the same names to docker. Binding to *src* path instead to *install* path is possible thanks to colcon's `--symlink-install` flag.
+
+The other way of passing custom parameters is to bind them whereever you want inside docker. You can also use custom names if you like. After binding you can pass paths to those files as parameters as it is shown in husarion_nav2 package [README.md](./husarion_nav2/README.md).
