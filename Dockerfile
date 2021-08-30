@@ -13,11 +13,13 @@ RUN apt update && apt install -y \
 
 RUN apt upgrade -y 
 
+WORKDIR /app
+
 # create ros2_ws, copy and build package
-RUN mkdir -p /ros2_ws/src
-COPY ./husarion_nav2 /ros2_ws/src/husarion_nav2
-WORKDIR /ros2_ws 
-RUN source /opt/ros/$ROS_DISTRO/setup.bash \
+RUN mkdir -p ros2_ws/src
+COPY ./husarion_nav2 /app/ros2_ws/src/husarion_nav2
+RUN cd ros2_ws \
+    && source /opt/ros/$ROS_DISTRO/setup.bash \
     && colcon build --symlink-install
     
 # clear ubuntu packages

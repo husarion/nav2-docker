@@ -16,12 +16,15 @@ services:
   bridge:
     image: ros:eloquent-ros1-bridge
     restart: on-failure
+    environment:
+      - "ROS_IP=bridge"
+      - "ROS_MASTER_URI=http://my-ros-master:11311"  
     command: ros2 run ros1_bridge dynamic_bridge
 
 
-  # ROS Noetic master
+  # ROS Melodic master
   my-ros-master:
-    image: ros:noetic-ros-core
+    image: ros:melodic-ros-core
     restart: on-failure
     tty: true 
     environment:

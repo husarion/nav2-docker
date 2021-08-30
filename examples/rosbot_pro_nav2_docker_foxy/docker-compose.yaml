@@ -27,13 +27,30 @@ services:
   bridge:
     image: ros:foxy-ros1-bridge
     restart: on-failure
+    environment:
+      - "ROS_IP=bridge"
+      - "ROS_MASTER_URI=http://my-ros-master:11311"
     command: ros2 run ros1_bridge dynamic_bridge
+
+
+  # ROS Melodic master
+  my-ros-master:
+    image: ros:melodic-ros-core
+    restart: on-failure
+    tty: true 
+    environment:
+      - "ROS_IP=my-ros-master"
+      - "ROS_MASTER_URI=http://my-ros-master:11311"    
+    command: stdbuf -o L roscore
 
 
   # ROS Melodic rosbot hardware layer
   rosbot:
     image: husarion/rosbot
     tty: true      
+    environment:
+      - "ROS_IP=rosbot"
+      - "ROS_MASTER_URI=http://my-ros-master:11311"
     restart: on-failure
       - "SERIAL_PORT=/dev/ttyS4" # default: ttyS1 - rosbot2.0; ttyS4 - rosbot2.0 `pro
     devices:
@@ -45,6 +62,9 @@ services:
   rplidar:
     image: husarion/rplidar:latest
     restart: unless-stopped
+    environment:
+      - "ROS_IP=rplidar"
+      - "ROS_MASTER_URI=http://my-ros-master:11311"
     devices:
       - /dev/ttyUSB0
     tty: true      
