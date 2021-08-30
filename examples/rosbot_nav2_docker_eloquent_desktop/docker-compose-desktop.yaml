@@ -9,7 +9,7 @@ services:
     network_mode: host
     ipc: host
     environment:
-      - "ROS_DOMAIN_ID=2"
+      - "ROS_DOMAIN_ID=0"
     command: ros2 launch husarion_nav2 bringup_both.launch.py
 
 
@@ -20,7 +20,7 @@ services:
     network_mode: host
     ipc: host
     environment:
-      - "ROS_DOMAIN_ID=2"
+      - "ROS_DOMAIN_ID=0"
     volumes:
       - ./rosbot_pro.rviz:/root/.rviz2/default.rviz
     shm_size: '512m'

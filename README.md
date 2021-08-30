@@ -29,7 +29,6 @@ This configuration gives you ability to make use of your desktop's computation p
 1. Start all container on Rosbot 2.0 Pro:
 ```bash
 # On Rosbot 2.0 Pro
-export HOST_IP=<rosbot ip>
 cd examples/rosbot_pro_nav2_docker_foxy_desktop
 docker-compose -f docker-compose-rosbot.yaml up
 ```
@@ -70,7 +69,6 @@ Just like with Rosbot 2.0 Pro you can take advantage of Rosbot 2.0 hardware with
 1. Start all container on Rosbot 2.0:
 ```bash
 # On Rosbot 2.0
-export HOST_IP=<rosbot ip>
 cd examples/rosbot_nav2_docker_eloquent_desktop
 docker-compose -f docker-compose-rosbot.yaml up
 ```
