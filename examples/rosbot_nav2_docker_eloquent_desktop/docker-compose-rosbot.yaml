@@ -2,20 +2,6 @@ version: "2.3"
 
 services:
 
-  # ROS Eloquent navigation
-  nav2:
-    image: husarion/nav2:eloquent
-    tty: true
-    restart: on-failure
-    network_mode: host
-    ipc: host
-    environment:
-      - "ROS_DOMAIN_ID=0"
-    volumes:
-      - ./config:/ros2_ws/src/husarion_nav2/config
-    command: ros2 launch husarion_nav2 bringup_both.launch.py
-
-
   # ROS Noetic + ROS 2 Eloquent
   bridge:
     image: ros:eloquent-ros1-bridge
