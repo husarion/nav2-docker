@@ -51,8 +51,8 @@ services:
     environment:
       - "ROS_IP=rosbot"
       - "ROS_MASTER_URI=http://my-ros-master:11311"
-    restart: on-failure
       - "SERIAL_PORT=/dev/ttyS4" # default: ttyS1 - rosbot2.0; ttyS4 - rosbot2.0 `pro
+    restart: on-failure
     devices:
       - "/dev/ttyS4"   # must match environment SERIAL_PORT 
     command: roslaunch rosbot_description rosbot_docker.launch
