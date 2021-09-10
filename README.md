@@ -4,10 +4,10 @@ Dockerized [Nav2](https://navigation.ros.org/) nodes with custom Husarion launch
 For more details about our own launch file read it's [README.md](./husarion_nav2/README.md)
 
 ## Examples
-### Rosbot 2.0 Pro stadlone with Rviz2 VNC
+### Rosbot 2.0 Pro standalone with Rviz2 VNC
 1. Start all containers:
 ```bash
-cd examples/rosbot_pro_nav2_docker_foxy
+cd examples/rosbot_pro_nav2_docker
 docker-compose up
 ```
 
@@ -29,14 +29,14 @@ This configuration gives you ability to make use of your desktop's computation p
 1. Start all container on Rosbot 2.0 Pro:
 ```bash
 # On Rosbot 2.0 Pro
-cd examples/rosbot_pro_nav2_docker_foxy_desktop
+cd examples/rosbot_pro_nav2_docker_desktop
 docker-compose -f docker-compose-rosbot.yaml up
 ```
 
 2. Start all container on your desktop:
 ```bash
 # On desktop
-cd examples/rosbot_pro_nav2_docker_foxy_desktop
+cd examples/rosbot_pro_nav2_docker_desktop
 docker-compose -f docker-compose-desktop.yaml up
 ```
 3. In the web browser opn url:  http://localhost:6080/
@@ -49,34 +49,26 @@ docker-compose -f docker-compose-desktop.yaml up
 ros2 run rviz2 rviz2
 ```
 
-### Rosbot 2.0 stadlone
-> Note 2: Rosbot 2.0 uses ARM32 processor which is not suported by ROS Foxy dockers and above. That is why in this case we base our docker image on  `ros:eloquent-ros-core`.
-
-
-1. Start all containers:
-```bash
-cd examples/rosbot_nav2_docker_eloquent
-docker-compose up
-```
-
-2. Now you can log in to docker and control robot via terminal or add own nodes. Unfortunately due to hardware limitations Rosbot 2.0 is not supported by [ros2-desktop-vnc](https://hub.docker.com/r/husarion/ros2-desktop-vnc).
 
 ### Rosbot 2.0 + Navigation2 and Rviz2 VNC on desktop
-Just like with Rosbot 2.0 Pro you can take advantage of Rosbot 2.0 hardware with your desktop's computation power.
+
+> Note 2: Rosbot 2.0 uses ARM32 processor which is not supported by ROS Foxy dockers and above. That is why we are not supplying standalone version of nav2 for non Pro version of Rosbot 2.0.
+
+Just like previously you can take advantage of Rosbot 2.0 hardware with your desktop's computation power.
 
 > Note: Both devices have to be in the same network
 
 1. Start all container on Rosbot 2.0:
 ```bash
 # On Rosbot 2.0
-cd examples/rosbot_nav2_docker_eloquent_desktop
+cd examples/rosbot_nav2_docker_desktop
 docker-compose -f docker-compose-rosbot.yaml up
 ```
 
 2. Start all container on your desktop:
 ```bash
 # On desktop
-cd examples/rosbot_nav2_docker_eloquent_desktop
+cd examples/rosbot_nav2_docker_desktop
 docker-compose -f docker-compose-desktop.yaml up
 ```
 3. In the web browser opn url: http://localhost:6080/

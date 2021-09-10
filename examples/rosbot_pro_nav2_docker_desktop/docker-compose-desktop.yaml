@@ -1,9 +1,9 @@
 version: "2.3"
 
 services:
-  # ROS Eloquent navigation
+  # ROS Galactic navigation
   nav2:
-    image: husarion/nav2:eloquent
+    image: husarion/nav2:galactic-latest 
     tty: true
     restart: on-failure
     network_mode: host

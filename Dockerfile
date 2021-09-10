@@ -1,6 +1,5 @@
 # choose ROS distribudion based on build argument
-ARG ROS_DISTRO=galactic
-FROM ros:$ROS_DISTRO-ros-core
+FROM ros:galactic-ros-core
 
 SHELL ["/bin/bash", "-c"]
 
