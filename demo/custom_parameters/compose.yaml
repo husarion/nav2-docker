@@ -4,7 +4,7 @@ services:
 
   # ROS Galactic navigation
   nav2:
-    image: husarion/nav2:galactic-latest
+    image: husarion/nav2:galactic
     tty: true
     restart: on-failure
     environment:

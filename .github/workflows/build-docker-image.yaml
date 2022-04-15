@@ -35,6 +35,6 @@ jobs:
         file: ./Dockerfile
         platforms: linux/arm64, linux/amd64
         push: true
-        tags: husarion/nav2:latest
-        cache-from: type=registry,ref=husarion/nav2:latest
+        tags: husarion/nav2:galactic
+        cache-from: type=registry,ref=husarion/nav2:galactic
         cache-to: type=inline

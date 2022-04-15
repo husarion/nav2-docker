@@ -1,0 +1,7 @@
+.github/
+demo/
+.dockerignore
+.gitignore
+Dockerfile
+LICENSE
+README.md
