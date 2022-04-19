@@ -1,5 +1,5 @@
 # choose ROS distribudion based on build argument
-FROM ros:galactic-ros-core
+FROM husarion/ros:galactic-ros-core
 
 SHELL ["/bin/bash", "-c"]
 
@@ -11,8 +11,7 @@ RUN apt update && apt install -y \
         python3-pip \
         python3-colcon-common-extensions \
         ros-$ROS_DISTRO-slam-toolbox \
-        ros-$ROS_DISTRO-navigation2 \
-        ros-$ROS_DISTRO-rmw-fastrtps-cpp && \
+        ros-$ROS_DISTRO-navigation2 && \
     apt upgrade -y && \
     source /opt/ros/$ROS_DISTRO/setup.bash && \
     colcon build --symlink-install && \
