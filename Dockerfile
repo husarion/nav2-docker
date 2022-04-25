@@ -1,5 +1,5 @@
 # choose ROS distribudion based on build argument
-FROM husarion/ros:galactic-ros-core
+FROM ros:galactic-ros-core
 
 SHELL ["/bin/bash", "-c"]
 
@@ -7,9 +7,12 @@ WORKDIR /ros2_ws
 
 COPY . .
 
+ENV RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+
 RUN apt update && apt install -y \
         python3-pip \
         python3-colcon-common-extensions \
+        ros-${ROS_DISTRO}-rmw-fastrtps-cpp \
         ros-$ROS_DISTRO-slam-toolbox \
         ros-$ROS_DISTRO-navigation2 && \
     apt upgrade -y && \
@@ -22,7 +25,5 @@ RUN apt update && apt install -y \
     apt-get autoremove -y && \
     apt clean && \
     rm -rf /var/lib/apt/lists/*
-
-ENV RMW_IMPLEMENTATION=rmw_fastrtps_cpp
 
 ENTRYPOINT ["/ros2_ws/ros_entrypoint.sh"]
