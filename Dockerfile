@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y \
         ros-${ROS_DISTRO}-rmw-fastrtps-cpp \
         ros-$ROS_DISTRO-slam-toolbox \
         ros-$ROS_DISTRO-navigation2 && \
-    apt-get remove -y ros-$ROS_DISTRO-rmw-cyclonedds-cpp && \
+    # apt-get remove -y ros-$ROS_DISTRO-rmw-cyclonedds-cpp && \
     source /opt/ros/$ROS_DISTRO/setup.bash && \
     colcon build --symlink-install && \
     # make the image smaller
