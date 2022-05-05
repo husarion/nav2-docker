@@ -9,12 +9,18 @@ COPY . .
 
 ENV RMW_IMPLEMENTATION=rmw_fastrtps_cpp
 
-RUN apt-get update && apt-get install -y \
+RUN apt update && apt install -y \
+        git \
         python3-pip \
         python3-colcon-common-extensions \
-        ros-${ROS_DISTRO}-rmw-fastrtps-cpp \
+        ros-$ROS_DISTRO-rmw-fastrtps-cpp \
         ros-$ROS_DISTRO-slam-toolbox \
-        ros-$ROS_DISTRO-navigation2 && \
+        ros-$ROS_DISTRO-navigation2 \
+        ros-$ROS_DISTRO-nav2-bringup \
+        ros-$ROS_DISTRO-nav2-rviz-plugins \
+        ros-$ROS_DISTRO-rviz* && \
+    git clone https://github.com/husarion/amcl_auto_localization.git src/amcl_auto_localization && \
+    apt upgrade -y && \
     # apt-get remove -y ros-$ROS_DISTRO-rmw-cyclonedds-cpp && \
     source /opt/ros/$ROS_DISTRO/setup.bash && \
     colcon build --symlink-install && \
