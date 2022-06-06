@@ -3,7 +3,7 @@ name: Build/Publish Docker Image
 on:
   push:
     branches:
-      - 'main'
+      - 'humble'
   
 jobs:
   build_galactic:
@@ -35,6 +35,6 @@ jobs:
         file: ./Dockerfile
         platforms: linux/arm64, linux/amd64
         push: true
-        tags: husarion/nav2:galactic
-        cache-from: type=registry,ref=husarion/nav2:galactic
+        tags: husarion/nav2:humble
+        cache-from: type=registry,ref=husarion/nav2:humble
         cache-to: type=inline
